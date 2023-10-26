@@ -1,0 +1,19 @@
+php artisan d:create Sliders
+
+
+
+php artisan d:make:model Slider -d Design/Sliders --migration   
+
+              or
+
+php artisan make:migration add_sliders_table --path=/app/Domain/Design/Sliders/Migrations    
+
+
+
+php artisan d:make:controller SliderController -d Design/Sliders
+
+
+php artisan d:make:request SliderRequest -d Design/Sliders
+
+
+

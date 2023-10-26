@@ -22,6 +22,8 @@ use App\Domain\Design\Pages\Services\IPageService;
 use App\Domain\Design\Pages\Services\PageService;
 use App\Domain\Design\PageTemplates\Services\IPageTemplateService;
 use App\Domain\Design\PageTemplates\Services\PageTemplateService;
+use App\Domain\Design\Sliders\Services\ISliderService;
+use App\Domain\Design\Sliders\Services\SliderService;
 use App\Domain\Design\Templates\Services\ITemplateService;
 use App\Domain\Design\Templates\Services\TemplateService;
 use App\Domain\News\Services\INewsService;
@@ -50,6 +52,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ITemplateService::class,TemplateService::class);
         $this->app->bind(IPageTemplateService::class,PageTemplateService::class);
         $this->app->bind(IContactUsService::class,ContactUsService::class);
+        $this->app->bind(ISliderService::class,SliderService::class);
 
     }
 
@@ -86,6 +89,9 @@ class AppServiceProvider extends ServiceProvider
 
         //ContactUs
         $this->loadMigrationsFrom('app/Domain/Contacts/Migrations');
+
+        //Sliders
+        $this->loadMigrationsFrom('app/Domain/Design/Sliders/Migrations');
 
 
     }

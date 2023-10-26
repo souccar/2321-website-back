@@ -9,6 +9,7 @@ use App\Domain\Contacts\Http\Controllers\ContactUsController;
 use App\Domain\Customers\Http\Controllers\CustomerController;
 use App\Domain\Design\Pages\Http\Controllers\PageController;
 use App\Domain\Design\PageTemplates\Http\Controllers\PageTemplateController;
+use App\Domain\Design\Sliders\Http\Controllers\SliderController;
 use App\Domain\Design\Templates\Http\Controllers\TemplateController;
 use App\Domain\News\Http\Controllers\NewsController;
 use Illuminate\Http\Request;
@@ -110,3 +111,11 @@ Route::get('/allContacts',[ContactUsController::class,'getAll']);
 Route::get('/contacts/{id}',[ContactUsController::class,'getById']);
 Route::post('/contactUs',[ContactUsController::class,'store']);
 Route::delete('/contacts/{id}',[ContactUsController::class,'destroy']);
+
+
+//Slider
+Route::post('/Sliders',[SliderController::class,'store']);
+Route::post('/Sliders/{id}',[SliderController::class,'edit']);
+Route::delete('/Sliders/{id}',[SliderController::class,'destroy']);
+Route::post('/uploadSliderImage',[SliderController::class,'uploadSliderImage']);
+Route::get('/getAllSliders',[SliderController::class,'getAll']);
