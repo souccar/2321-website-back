@@ -15,7 +15,8 @@ class News extends Model
     protected $fillable = [
         'title',
         'description',
-        'imagePath'
+        'imagePath',
+        'displayInHome'
     ];
 
     protected $hidden = [

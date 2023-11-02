@@ -20,6 +20,10 @@ class NewsService implements INewsService
         return News::orderBy('id', 'DESC')->take(4)->get();
     }
 
+    public function getOnlyForHome(){
+        return News::where('displayInHome',1)->orderBy('id','DESC')->take(4)->get();
+    }
+
     public function Create($entity){
         $result = News::create($entity);
         return $result;

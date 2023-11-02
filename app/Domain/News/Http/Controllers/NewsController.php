@@ -7,9 +7,8 @@ use App\Domain\News\Http\Requests\NewsRequest;
 use App\Domain\News\Services\INewsService;
 use App\Helpers\AhcResponse;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use File;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class NewsController extends Controller
@@ -43,6 +42,7 @@ class NewsController extends Controller
                         $item->title,
                         $item->description,
                         $item->imagePath,
+                        $item->displayInHome,
                         $base64
                     );
 
@@ -55,6 +55,7 @@ class NewsController extends Controller
                         $item->title,
                         $item->description,
                         $item->imagePath,
+                        $item->displayInHome,
                         null
                     );
 
@@ -85,6 +86,7 @@ class NewsController extends Controller
                     $News->title,
                     $News->description,
                     $News->imagePath,
+                    $News->displayInHome,
                     $base64
                 );
 
@@ -96,6 +98,7 @@ class NewsController extends Controller
                     $News->title,
                     $News->description,
                     $News->imagePath,
+                    $News->displayInHome,
                     null
                 );
 
@@ -127,6 +130,25 @@ class NewsController extends Controller
         }
     }
 
+    public function getOnlyForHome(){
+        $newsForHOme = $this->_NewsService->getOnlyForHome();
+        if ($newsForHOme) {
+            if ($newsForHOme->count() == 0)
+                return AhcResponse::sendResponse();
+
+            foreach ($newsForHOme as $item) {
+                if ($item->imagePath != null && file_exists(public_path($item->imagePath))) {
+                    $item->imagePath = $item->imagePath;
+                } else {
+                    $item->imagePath = null;
+                }
+            }
+            return AhcResponse::sendResponse($newsForHOme);
+        } else {
+            return AhcResponse::sendResponse([], false, ['Error']);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -137,7 +159,8 @@ class NewsController extends Controller
         $createdNews = $this->_NewsService->Create([
             'title' => $request->title,
             'description' => $request->description,
-            'imagePath' => null
+            'imagePath' => null,
+            'displayInHome' => $request->displayInHome
         ]);
 
 
@@ -184,7 +207,8 @@ class NewsController extends Controller
             [
                 'title' => $request->title,
                 'description' => $request->description,
-                'imagePath' => $request->hasFile('image') ? 'NewsImages' . '/' . $newImage : $oldNews->imagePath
+                'imagePath' => $request->hasFile('image') ? 'NewsImages' . '/' . $newImage : $oldNews->imagePath,
+                'displayInHome' => $request->displayInHome
             ],
             $id
         );

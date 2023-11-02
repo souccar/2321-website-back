@@ -41,6 +41,7 @@ Route::delete('/customers/{id}', [CustomerController::class, 'delete']);
 //News
 Route::get('/news',[NewsController::class,'getAll']);
 Route::get('/news/{id}',[NewsController::class,'getById']);
+Route::get('/getOnlyForHome',[NewsController::class,'getOnlyForHome']);
 Route::get('/lastNews',[NewsController::class,'getLastEightNews']);
 Route::post('/news',[NewsController::class,'store']);
 Route::post('/news/{id}',[NewsController::class,'edit']);
