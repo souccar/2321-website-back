@@ -8,9 +8,15 @@ use App\Domain\News\Services\INewsService;
 class NewsService implements INewsService
 {
     public function GetAll($count){
-        return News::Paginate(
+        $data = News::Paginate(
             $perPage = $count
-        );
+        ); 
+        
+        foreach ($data as $item){
+            $item->append('imageBase64');
+        }
+
+        return $data; 
     }
     public function GetById($id){
         return News::find($id);

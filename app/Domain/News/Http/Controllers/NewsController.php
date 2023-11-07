@@ -27,45 +27,52 @@ class NewsController extends Controller
         $allData = [];
 
         $News = $this->_NewsService->GetAll($request->count != null ? $request->count : 5);
-        if ($News) {
-            if ($News->count() == 0)
-                return AhcResponse::sendResponse();
+        
+        // $r2 = $News->links;
+        // $r3 = $News->per_page;
+        // $r4 = $News->current_page;
 
-            foreach ($News as $item) {
+        // if ($News) {
+        //     if ($News->count() == 0)
+        //         return AhcResponse::sendResponse();
 
-                if ($item->imagePath != null && file_exists(public_path($item->imagePath))) {
+        //     foreach ($News as $item) {
 
-                    $base64 = base64_encode(file_get_contents($item->imagePath));
+        //         if ($item->imagePath != null && file_exists(public_path($item->imagePath))) {
 
-                    $data = new ReadNewsDto(
-                        $item->id,
-                        $item->title,
-                        $item->description,
-                        $item->imagePath,
-                        $item->displayInHome,
-                        $base64
-                    );
+        //             $base64 = base64_encode(file_get_contents($item->imagePath));
 
-                    array_push($allData, $data);
+        //             $data = new ReadNewsDto(
+        //                 $item->id,
+        //                 $item->title,
+        //                 $item->description,
+        //                 $item->imagePath,
+        //                 $item->displayInHome,
+        //                 $base64
+        //             );
 
-                } else {
+        //             array_push($allData, $data);
 
-                    $data = new ReadNewsDto(
-                        $item->id,
-                        $item->title,
-                        $item->description,
-                        $item->imagePath,
-                        $item->displayInHome,
-                        null
-                    );
+        //         } else {
 
-                    array_push($allData, $data);
-                }
-            }
-            return AhcResponse::sendResponse($allData);
-        } else {
-            return AhcResponse::sendResponse([], false, ['Error']);
-        }
+        //             $data = new ReadNewsDto(
+        //                 $item->id,
+        //                 $item->title,
+        //                 $item->description,
+        //                 $item->imagePath,
+        //                 $item->displayInHome,
+        //                 null
+        //             );
+
+        //             array_push($allData, $data);
+        //         }
+        //     }            
+        //     return AhcResponse::sendResponse($News);
+        // } else {
+        //     return AhcResponse::sendResponse([], false, ['Error']);
+        // }
+
+        return AhcResponse::sendResponse($News);
     }
 
     /**
