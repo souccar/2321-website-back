@@ -24,55 +24,9 @@ class NewsController extends Controller
      */
     public function getAll(Request $request)
     {
-        $allData = [];
+        $news = $this->_NewsService->GetAll($request->count != null ? $request->count : 5);       
 
-        $News = $this->_NewsService->GetAll($request->count != null ? $request->count : 5);
-        
-        // $r2 = $News->links;
-        // $r3 = $News->per_page;
-        // $r4 = $News->current_page;
-
-        // if ($News) {
-        //     if ($News->count() == 0)
-        //         return AhcResponse::sendResponse();
-
-        //     foreach ($News as $item) {
-
-        //         if ($item->imagePath != null && file_exists(public_path($item->imagePath))) {
-
-        //             $base64 = base64_encode(file_get_contents($item->imagePath));
-
-        //             $data = new ReadNewsDto(
-        //                 $item->id,
-        //                 $item->title,
-        //                 $item->description,
-        //                 $item->imagePath,
-        //                 $item->displayInHome,
-        //                 $base64
-        //             );
-
-        //             array_push($allData, $data);
-
-        //         } else {
-
-        //             $data = new ReadNewsDto(
-        //                 $item->id,
-        //                 $item->title,
-        //                 $item->description,
-        //                 $item->imagePath,
-        //                 $item->displayInHome,
-        //                 null
-        //             );
-
-        //             array_push($allData, $data);
-        //         }
-        //     }            
-        //     return AhcResponse::sendResponse($News);
-        // } else {
-        //     return AhcResponse::sendResponse([], false, ['Error']);
-        // }
-
-        return AhcResponse::sendResponse($News);
+        return AhcResponse::sendResponse($news);
     }
 
     /**

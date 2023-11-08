@@ -52,6 +52,21 @@ class Category extends Model
 
     protected $guarded = [];
 
+    protected $appends = ['imageBase64'];
+
+    public function getImageBase64Attribute()
+    {
+        if ($this->imagePath != null && file_exists(public_path($this->imagePath)))
+        {
+            $base64 = base64_encode(file_get_contents($this->imagePath));
+            return $base64;
+        }
+        else{
+            return null;
+        }
+    }
+
+
     
     /*
         Relations
