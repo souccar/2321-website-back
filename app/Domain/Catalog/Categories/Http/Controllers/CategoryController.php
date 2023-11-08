@@ -25,50 +25,9 @@ class CategoryController extends Controller
      */
     public function getAll(Request $request)
     {
-        $allData = [];
-
         $categories = $this->_categoryService->GetAll($request->count != null ? $request->count : 5);
-        if ($categories) {
-            if ($categories->count() == 0)
-                return AhcResponse::sendResponse();
 
-            foreach ($categories as $category) {
-
-                if ($category->imagePath != null && file_exists(public_path($category->imagePath))) {
-
-                    $base64 = base64_encode(file_get_contents($category->imagePath));
-
-                    $data = new ReadCategoryDto(
-                        $category->id,
-                        $category->name,
-                        $category->description,
-                        $category->point,
-                        $category->imagePath,
-                        $category->category,
-                        $base64
-                    );
-
-                    array_push($allData, $data);
-
-                } else {
-
-                    $data = new ReadCategoryDto(
-                        $category->id,
-                        $category->name,
-                        $category->description,
-                        $category->point,
-                        $category->imagePath,
-                        $category->category,
-                        null
-                    );
-
-                    array_push($allData, $data);
-                }
-            }
-            return AhcResponse::sendResponse($allData);
-        } else {
-            return AhcResponse::sendResponse([], false, ['Error']);
-        }
+        return AhcResponse::sendResponse($categories);
     }
 
     /**

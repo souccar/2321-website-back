@@ -8,9 +8,15 @@ use App\Domain\Catalog\Categories\Models\Category;
 class CategoryService implements ICategoryService
 {
     public function GetAll($count){
-        return Category::with('category')->Paginate(
+        $data = Category::with('category')->Paginate(
             $perPage = $count
-        );
+        ); 
+        
+        foreach ($data as $item){
+            $item->append('imageBase64');
+        }
+
+        return $data; 
     }
     public function GetById($id){
         return Category::with('category')->find($id);
