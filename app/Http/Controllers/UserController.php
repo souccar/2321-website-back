@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AhcResponse;
+use App\Http\Requests\EditUserRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -45,15 +46,15 @@ class UserController extends Controller
         return AhcResponse::sendResponse($data);
     }
 
-    public function edit(UserRequest $request, $id){
+    public function edit(EditUserRequest $request, $id){
 
         $request->validated();
         $user = User::find($id);
-
+        
         $user->update([
-            'name'=> $request->name,
-            'email'=> $request->email,
-            'password'=> Hash::make($request->password)
+            'name'=> $request->name != null ? $request->name : $user->name,
+            'email'=> $request->email != null ? $request->email : $user->email,
+            'password'=> $request->password != null ? Hash::make($request->password) : $user->password
         ]);
 
         $user->save();

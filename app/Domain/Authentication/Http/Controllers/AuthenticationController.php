@@ -20,7 +20,8 @@ class AuthenticationController extends Controller
         if (!Auth::attempt($credentials)) {
             return AhcResponse::sendResponse([], false, ['message' => 'Login Failed!']);
         }
-        $user = $request->user();
+        $user = Auth::user();
+        // $user = $request->user();
         $tokenResult = $user->createToken('Personal Access Token');
         $token = $tokenResult->plainTextToken;
 
