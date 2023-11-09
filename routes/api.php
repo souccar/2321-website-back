@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Authentication\Http\Controllers\AuthenticationController;
 use App\Domain\Catalog\Brands\Http\Controllers\BrandController;
 use App\Domain\Catalog\Categories\Http\Controllers\CategoryController;
 use App\Domain\Catalog\ProductImages\Http\Controllers\ProductImageController;
@@ -12,6 +13,7 @@ use App\Domain\Design\PageTemplates\Http\Controllers\PageTemplateController;
 use App\Domain\Design\Sliders\Http\Controllers\SliderController;
 use App\Domain\Design\Templates\Http\Controllers\TemplateController;
 use App\Domain\News\Http\Controllers\NewsController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,9 +28,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 // require_once('app/Domain/Catalog/Categories/Routes/category-routes.php');
 
@@ -120,3 +122,17 @@ Route::post('/Sliders/{id}',[SliderController::class,'edit']);
 Route::delete('/Sliders/{id}',[SliderController::class,'destroy']);
 Route::post('/uploadSliderImage',[SliderController::class,'uploadSliderImage']);
 Route::get('/getAllSliders',[SliderController::class,'getAll']);
+
+
+//User
+Route::get('users/{count}' ,[UserController::class,'GetAll']);
+Route::get('user/{id}' ,[UserController::class,'getById']);
+Route::post('/register',[UserController::class,'register']);
+Route::put('/editUser/{id}',[UserController::class,'edit']);
+Route::delete('/deleteUser/{id}',[UserController::class,'destroy']);
+
+
+//Authentication
+Route::post('login',[AuthenticationController::class,'login']);
+Route::post('logout',[AuthenticationController::class,'logout']);
+

@@ -55,7 +55,7 @@ class TemplateController extends Controller
         );
 
         if ($template) {
-            if ($template->imagePath) {
+            if ($template->imagePath && file_exists(public_path($template->imagePath))) {
                 $parentBase64 = base64_encode(file_get_contents($template->imagePath));
                 $templateDto->base64 = $parentBase64;
             }
@@ -76,7 +76,7 @@ class TemplateController extends Controller
                         $child->numberOfColumns,
                         $child->parentTemplateId
                     );
-                    if($child->imagePath){
+                    if($child->imagePath && file_exists(public_path($child->imagePath))){
                         $childBase64 = base64_encode(file_get_contents($child->imagePath));
                         $child->base64 = $childBase64;
                     }

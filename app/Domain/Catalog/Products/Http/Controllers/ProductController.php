@@ -37,7 +37,7 @@ class ProductController extends Controller
                 return AhcResponse::sendResponse();
             return AhcResponse::sendResponse($products);
         } else {
-            return AhcResponse::sendResponse(false, ['Error']);
+            return AhcResponse::sendResponse([],false, ['Error']);
         }
     }
 
@@ -100,7 +100,7 @@ class ProductController extends Controller
                 return AhcResponse::sendResponse();
             return AhcResponse::sendResponse($products);
         } else {
-            return AhcResponse::sendResponse(false, ['Error']);
+            return AhcResponse::sendResponse([],false, ['Error']);
         }
     }
 
@@ -112,7 +112,7 @@ class ProductController extends Controller
                 return AhcResponse::sendResponse();
             return AhcResponse::sendResponse($products);
         } else {
-            return AhcResponse::sendResponse(false, ['Error']);
+            return AhcResponse::sendResponse([],false, ['Error']);
         }
     }
 
@@ -124,7 +124,7 @@ class ProductController extends Controller
                 return AhcResponse::sendResponse();
             return AhcResponse::sendResponse($products);
         } else {
-            return AhcResponse::sendResponse(false, ['Error']);
+            return AhcResponse::sendResponse([],false, ['Error']);
         }
     }
 
