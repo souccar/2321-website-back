@@ -7,8 +7,16 @@ use App\Domain\Design\Sliders\Services\ISliderService;
 
 class SliderService implements ISliderService
 {
-    public function GetAll(){
-        return Slider::get();
+    public function GetAll($count){
+        $data = Slider::Paginate(
+            $perPage = $count
+        ); 
+        
+        foreach ($data as $item){
+            $item->append('imageBase64');
+        }
+
+        return $data; 
     }
 
     public function Create($entity){

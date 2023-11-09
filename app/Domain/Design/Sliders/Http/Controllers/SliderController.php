@@ -16,10 +16,11 @@ class SliderController extends Controller
     {
         $this->_sliderService = $sliderService;
     }
-
-    public function getAll()
+    
+    public function getAll(Request $request)
     {
-        $slider = $this->_sliderService->GetAll();
+        $slider = $this->_sliderService->GetAll($request->count != null ? $request->count : 5);       
+
         return AhcResponse::sendResponse($slider);
     }
 
