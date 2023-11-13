@@ -122,6 +122,7 @@ Route::post('/Sliders/{id}',[SliderController::class,'edit']);
 Route::delete('/Sliders/{id}',[SliderController::class,'destroy']);
 Route::post('/uploadSliderImage',[SliderController::class,'uploadSliderImage']);
 Route::get('/getAllSliders',[SliderController::class,'getAll']);
+Route::get('/getSliderById/{id}',[SliderController::class,'getById']);
 
 
 //User
