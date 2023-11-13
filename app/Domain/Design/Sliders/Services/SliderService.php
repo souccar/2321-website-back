@@ -19,6 +19,11 @@ class SliderService implements ISliderService
         return $data; 
     }
 
+    public function GetById($id){
+        $data = Slider::find($id);
+        return $data; 
+    }
+
     public function Create($entity){
         $result = Slider::create($entity);
         return $result;

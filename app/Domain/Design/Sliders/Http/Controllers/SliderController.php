@@ -24,6 +24,12 @@ class SliderController extends Controller
         return AhcResponse::sendResponse($slider);
     }
 
+    public function getById($id)
+    {
+        $slider = $this->_sliderService->GetById($id);
+        return AhcResponse::sendResponse($slider);
+    }
+
     public function store(SliderRequest $request)
     {
         $request->validated();
