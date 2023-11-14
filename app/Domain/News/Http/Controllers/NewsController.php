@@ -189,10 +189,7 @@ class NewsController extends Controller
         $isDeleted = $this->_NewsService->Delete($id);
 
         if ($isDeleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Delete Successfuly'
-            ]);
+            return AhcResponse::sendResponse(['Delete Successfuly']);
         } else {
             return AhcResponse::sendResponse([], false, ['DeleteError']);
         }

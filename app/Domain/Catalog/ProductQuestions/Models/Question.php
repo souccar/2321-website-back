@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Domain\Authorization\Roles\Models;
+namespace App\Domain\Catalog\ProductQuestions\Models;
 
-use App\Domain\Authorization\RolePermissions\Models\RolePermission;
-use App\Domain\Authorization\UserRoles\Models\UserRole;
+use App\Domain\Catalog\Products\Models\Product;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class Question extends Model
 {
-    use HasFactory,SoftDeletes;
+    use HasFactory;
 
-    protected $table = 'roles';
+    protected $table = 'questions';
 
     protected $fillable = [
-        'name',
-        'displayName'
+        'question',
+        'answer',
+        'productId'
     ];
 
     protected $hidden = [
@@ -48,14 +47,8 @@ class Role extends Model
 
     protected $guarded = [];
 
-
-    public function UserRoles()
+    public function product()
     {
-        return $this->hasMany(UserRole::class,'roleId','id');
-    }
-
-    public function RolePermissions()
-    {
-        return $this->hasMany(RolePermission::class,'roleId','id');
+        return $this->belongsTo(Product::class,'productId','id');
     }
 }

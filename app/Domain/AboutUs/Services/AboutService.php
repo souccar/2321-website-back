@@ -1,38 +1,34 @@
 <?php
 
-namespace App\Domain\Design\Sliders\Services;
+namespace App\Domain\AboutUs\Services;
 
-use App\Domain\Design\Sliders\Models\Slider;
-use App\Domain\Design\Sliders\Services\ISliderService;
+use App\Domain\AboutUs\Models\About;
+use App\Domain\AboutUs\Services\IAboutService;
 
-class SliderService implements ISliderService
+class AboutService implements IAboutService
 {
     public function GetAll($count){
-        $data = Slider::Paginate(
+        $data = About::Paginate(
             $perPage = $count
         );
         return $data; 
     }
-
     public function GetById($id){
-        $data = Slider::find($id);
-        return $data; 
+        return About::find($id);
     }
 
     public function Create($entity){
-        $result = Slider::create($entity);
+        $result = About::create($entity);
         return $result;
     }
-
     public function Update($entity,$id){
-        $original = Slider::find($id);
+        $original = About::find($id);
         $original->update($entity);
         $original->save();
         return $original;
     }
-
     public function Delete($id){
-        $original = Slider::find($id);
+        $original = About::find($id);
         return $original->delete();
     }
 }

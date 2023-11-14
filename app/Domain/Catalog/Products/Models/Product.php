@@ -5,6 +5,7 @@ namespace App\Domain\Catalog\Products\Models;
 use App\Domain\Catalog\Brands\Models\Brand;
 use App\Domain\Catalog\Categories\Models\Category;
 use App\Domain\Catalog\ProductImages\Models\ProductImage;
+use App\Domain\Catalog\ProductQuestions\Models\Question;
 use App\Domain\Catalog\ProductSizes\Models\ProductSize;
 use App\Domain\Catalog\SkinTypes\Models\SkinType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -86,5 +87,10 @@ class Product extends Model
     public function productImages()
     {
         return $this->hasMany(ProductImage::class,'productId','id');
+    }
+
+    public function productQuestions()
+    {
+        return $this->hasMany(Question::class,'productId','id');
     }
 }

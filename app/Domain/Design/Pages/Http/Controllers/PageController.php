@@ -172,10 +172,7 @@ class PageController extends Controller
 
         if ($isDeleted) {
             File::delete(str_replace('\\', '/', public_path() . '/' . $oldPage->imagePath));
-            return response()->json([
-                'success' => true,
-                'message' => 'Delete Successfuly'
-            ]);
+            return AhcResponse::sendResponse(['Delete Successfuly']);
         } else {
             return AhcResponse::sendResponse([], false, ['DeleteError']);
         }

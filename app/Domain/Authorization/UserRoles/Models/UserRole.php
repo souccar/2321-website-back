@@ -50,11 +50,11 @@ class UserRole extends Model
 
     public function User()
     {
-        return $this->belongsTo(User::class,'userId');
+        return $this->belongsTo(User::class,'userId','id');
     }
 
     public function Role()
     {
-        return $this->belongsTo(Role::class,'roleId');
+        return $this->belongsTo(Role::class,'roleId','id');
     }
 }

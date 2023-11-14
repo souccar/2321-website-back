@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Domain\AboutUs\Services\AboutService;
+use App\Domain\AboutUs\Services\IAboutService;
 use App\Domain\Authorization\Permission\Services\PermissionService;
 use App\Domain\Authorization\Permissions\Services\IPermissionService;
 use App\Domain\Authorization\RolePermissions\Services\IRolePermissionService;
@@ -16,6 +18,8 @@ use App\Domain\Catalog\Categories\Services\CategoryService;
 use App\Domain\Catalog\Categories\Services\ICategoryService;
 use App\Domain\Catalog\ProductImages\Services\IProductImageService;
 use App\Domain\Catalog\ProductImages\Services\ProductImageService;
+use App\Domain\Catalog\ProductQuestions\Services\IQuestionService;
+use App\Domain\Catalog\ProductQuestions\Services\QuestionService;
 use App\Domain\Catalog\Products\Services\IProductService;
 use App\Domain\Catalog\Products\Services\ProductService;
 use App\Domain\Catalog\ProductSizes\Services\IProductSizeService;
@@ -65,6 +69,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IPermissionService::class,PermissionService::class);
         $this->app->bind(IRolePermissionService::class,RolePermissionService::class);
         $this->app->bind(IUserRoleService::class,UserRoleService::class);
+        $this->app->bind(IAboutService::class,AboutService::class);
+        $this->app->bind(IQuestionService::class,QuestionService::class);
 
     }
 
@@ -77,6 +83,7 @@ class AppServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom('app/Domain/Catalog/Products/Migrations');
         $this->loadMigrationsFrom('app/Domain/Catalog/ProductImages/Migrations');
         $this->loadMigrationsFrom('app/Domain/Catalog/ProductSizes/Migrations');
+        $this->loadMigrationsFrom('app/Domain/Catalog/ProductQuestions/Migrations');
 
         //Category
         $this->loadMigrationsFrom('app/Domain/Catalog/Categories/Migrations');
@@ -104,6 +111,9 @@ class AppServiceProvider extends ServiceProvider
 
         //Sliders
         $this->loadMigrationsFrom('app/Domain/Design/Sliders/Migrations');
+
+        //AboutUs
+        $this->loadMigrationsFrom('app/Domain/AboutUs/Migrations');
 
         //Roles
         $this->loadMigrationsFrom('app/Domain/Authorization/Roles/Migrations');

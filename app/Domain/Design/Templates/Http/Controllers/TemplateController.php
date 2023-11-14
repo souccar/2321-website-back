@@ -183,10 +183,7 @@ class TemplateController extends Controller
         $isDeleted = $this->_templateService->Delete($id);
 
         if ($isDeleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Delete Successfuly'
-            ]);
+            return AhcResponse::sendResponse(['Delete Successfuly']);
         } else {
             return AhcResponse::sendResponse([], false, ['DeleteError']);
         }
