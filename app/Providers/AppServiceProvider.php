@@ -2,6 +2,14 @@
 
 namespace App\Providers;
 
+use App\Domain\Authorization\Permission\Services\PermissionService;
+use App\Domain\Authorization\Permissions\Services\IPermissionService;
+use App\Domain\Authorization\RolePermissions\Services\IRolePermissionService;
+use App\Domain\Authorization\RolePermissions\Services\RolePermissionService;
+use App\Domain\Authorization\Roles\Services\IRoleService;
+use App\Domain\Authorization\Roles\Services\RoleService;
+use App\Domain\Authorization\UserRoles\Services\IUserRoleService;
+use App\Domain\Authorization\UserRoles\Services\UserRoleService;
 use App\Domain\Catalog\Brands\Services\BrandService;
 use App\Domain\Catalog\Brands\Services\IBrandService;
 use App\Domain\Catalog\Categories\Services\CategoryService;
@@ -53,6 +61,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IPageTemplateService::class,PageTemplateService::class);
         $this->app->bind(IContactUsService::class,ContactUsService::class);
         $this->app->bind(ISliderService::class,SliderService::class);
+        $this->app->bind(IRoleService::class,RoleService::class);
+        $this->app->bind(IPermissionService::class,PermissionService::class);
+        $this->app->bind(IRolePermissionService::class,RolePermissionService::class);
+        $this->app->bind(IUserRoleService::class,UserRoleService::class);
 
     }
 
@@ -93,6 +105,16 @@ class AppServiceProvider extends ServiceProvider
         //Sliders
         $this->loadMigrationsFrom('app/Domain/Design/Sliders/Migrations');
 
+        //Roles
+        $this->loadMigrationsFrom('app/Domain/Authorization/Roles/Migrations');
 
+        //Permissions
+        $this->loadMigrationsFrom('app/Domain/Authorization/Permissions/Migrations');
+
+        //RolePermissions
+        $this->loadMigrationsFrom('app/Domain/Authorization/RolePermissions/Migrations');
+
+        //UserRoles
+        $this->loadMigrationsFrom('app/Domain/Authorization/UserRoles/Migrations');
     }
 }
