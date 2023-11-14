@@ -1,9 +1,11 @@
 <?php
 
+use App\Domain\AboutUs\Http\Controllers\AboutController;
 use App\Domain\Authentication\Http\Controllers\AuthenticationController;
 use App\Domain\Catalog\Brands\Http\Controllers\BrandController;
 use App\Domain\Catalog\Categories\Http\Controllers\CategoryController;
 use App\Domain\Catalog\ProductImages\Http\Controllers\ProductImageController;
+use App\Domain\Catalog\ProductQuestions\Http\Controllers\QuestionController;
 use App\Domain\Catalog\Products\Http\Controllers\ProductController;
 use App\Domain\Catalog\SkinTypes\Http\Controllers\SkinTypeController;
 use App\Domain\Contacts\Http\Controllers\ContactUsController;
@@ -124,6 +126,20 @@ Route::post('/uploadSliderImage',[SliderController::class,'uploadSliderImage']);
 Route::get('/getAllSliders',[SliderController::class,'getAll']);
 Route::get('/getSliderById/{id}',[SliderController::class,'getById']);
 
+//AboutUs
+Route::post('/Abouts',[AboutController::class,'store']);
+Route::post('/Abouts/{id}',[AboutController::class,'edit']);
+Route::delete('/Abouts/{id}',[AboutController::class,'destroy']);
+Route::post('/uploadAboutUsImage',[AboutController::class,'uploadAboutUsImage']);
+Route::get('/getAllAbouts',[AboutController::class,'getAll']);
+Route::get('/getAboutById/{id}',[AboutController::class,'getById']);
+
+//ProductQuestions
+Route::post('/Questions',[QuestionController::class,'store']);
+Route::post('/Questions/{id}',[QuestionController::class,'edit']);
+Route::delete('/Questions/{id}',[QuestionController::class,'destroy']);
+Route::get('/getAllQuestions',[QuestionController::class,'getAll']);
+Route::get('/getQuestionById/{id}',[QuestionController::class,'getById']);
 
 //User
 Route::get('users/{count}' ,[UserController::class,'GetAll']);

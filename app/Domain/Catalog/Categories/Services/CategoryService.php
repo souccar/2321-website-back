@@ -10,12 +10,7 @@ class CategoryService implements ICategoryService
     public function GetAll($count){
         $data = Category::with('category')->Paginate(
             $perPage = $count
-        ); 
-        
-        foreach ($data as $item){
-            $item->append('imageBase64');
-        }
-
+        );
         return $data; 
     }
     public function GetById($id){

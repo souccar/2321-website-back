@@ -1,22 +1,20 @@
 <?php
 
-namespace App\Domain\Authorization\Roles\Models;
+namespace App\Domain\AboutUs\Models;
 
-use App\Domain\Authorization\RolePermissions\Models\RolePermission;
-use App\Domain\Authorization\UserRoles\Models\UserRole;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class About extends Model
 {
     use HasFactory,SoftDeletes;
 
-    protected $table = 'roles';
+    protected $table = 'abouts';
 
     protected $fillable = [
-        'name',
-        'displayName'
+        'description',
+        'imagePath'
     ];
 
     protected $hidden = [
@@ -48,14 +46,18 @@ class Role extends Model
 
     protected $guarded = [];
 
+    protected $appends = ['imageBase64'];
 
-    public function UserRoles()
-    {
-        return $this->hasMany(UserRole::class,'roleId','id');
-    }
 
-    public function RolePermissions()
+    public function getImageBase64Attribute()
     {
-        return $this->hasMany(RolePermission::class,'roleId','id');
+        if ($this->imagePath != null && file_exists(public_path($this->imagePath)))
+        {
+            $base64 = base64_encode(file_get_contents($this->imagePath));
+            return $base64;
+        }
+        else{
+            return null;
+        }
     }
 }

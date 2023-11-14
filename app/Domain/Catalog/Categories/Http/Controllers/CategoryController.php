@@ -156,10 +156,7 @@ class CategoryController extends Controller
         $isDeleted = $this->_categoryService->Delete($id);
 
         if ($isDeleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Delete Successfuly'
-            ]);
+            return AhcResponse::sendResponse(['Delete Successfuly']);
         } else {
             return AhcResponse::sendResponse([], false, ['DeleteError']);
         }

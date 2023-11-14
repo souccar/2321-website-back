@@ -68,10 +68,7 @@ class UserController extends Controller
         $isDeleted = $original->delete();
 
         if ($isDeleted) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Delete Successfuly'
-            ]);
+            return AhcResponse::sendResponse(['Delete Successfuly']);
         } else {
             return AhcResponse::sendResponse([], false, ['DeleteError']);
         }

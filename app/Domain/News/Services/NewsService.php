@@ -10,12 +10,7 @@ class NewsService implements INewsService
     public function GetAll($count){
         $data = News::Paginate(
             $perPage = $count
-        ); 
-        
-        foreach ($data as $item){
-            $item->append('imageBase64');
-        }
-
+        );
         return $data; 
     }
     public function GetById($id){
